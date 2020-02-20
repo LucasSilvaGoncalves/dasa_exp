@@ -1,0 +1,20 @@
+{
+  "name": "dasaexp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cryptr": "^6.0.1",
+    "knex": "^0.20.10",
+    "mysql": "^2.18.1",
+    "restify": "^8.5.1",
+    "restify-error": "^1.0.0"
+  },
+  "devDependencies": {}
+}

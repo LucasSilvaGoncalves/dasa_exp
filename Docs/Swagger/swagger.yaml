@@ -1,0 +1,248 @@
+swagger: '2.0'
+info:
+  title: Dasa EXP
+  description: API CRUD de usuários e super heróis.
+  contact:
+    name: Lucas Gonçalves
+    email: lucas.silvagoncalves@hotmail.com
+  version: "1.0"
+host: localhost:3000
+schemes:
+  - http
+produces:
+  - application/json
+paths:
+  /usuario:
+    get:
+      summary: Lista dos Usuários
+      description: |
+        Este endpoint retorna **todos** os usuários cadastrados no sistema.
+      tags:
+        - Usuario
+      responses:
+        200:
+          description: Uma lista de usuários em formato JSON
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Usuario'
+    post:
+      summary: Cria um usuário
+      description: |
+        Este endpoint cria um usuário no sistema.
+      parameters:
+        - name: user
+          in: body
+          description: Usuário
+          required: true
+          schema:
+            $ref: '#/definitions/Usuario'
+      tags:
+        - Usuario
+      responses:
+        201:
+          description: Usuário cadastrado com sucesso!
+          schema:
+            $ref: '#/definitions/Usuario'
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Atualiza um usuário
+      description: |
+        Este endpoint atualiza um usuário no sistema. O ID do usuário deve ser informado.
+      parameters:
+        - name: id
+          in: body
+          description: Usuário
+          required: true
+          schema:
+            $ref: '#/definitions/Usuario'
+      tags:
+        - Usuario
+      responses:
+        200:
+          description: Usuário atualizado com sucesso!
+          schema:
+            $ref: '#/definitions/Usuario'
+        404:
+          description: Usuário não encontrado. Lembre-se de informar o ID.
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+  /users/{id}:
+    get:
+      summary: Mostra apenas um usuário
+      description: |
+        Este endpoint retorna **apenas o usuário a qual foi informado o id**
+      parameters:
+        - name: id
+          in: path
+          description: ID do usuário
+          required: true
+          type: integer
+      tags:
+        - Usuario
+      responses:
+        200:
+          description: Um usuário
+          schema:
+            $ref: '#/definitions/Usuario'
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+  /heroi:
+    get:
+      summary: Lista dos Heróis
+      description: |
+        Este endpoint retorna **todos** os heróis cadastrados no sistema.
+      tags:
+        - Heroi
+      responses:
+        200:
+          description: Uma lista de heróis em formato JSON 
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Heroi'
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Cria um Herói
+      description: |
+        Este endpoint cria um herói no sistema.
+      parameters:
+        - name: id
+          in: body
+          description: Heroi
+          required: true
+          schema:
+            $ref: '#/definitions/Heroi'
+      tags:
+        - Heroi
+      responses:
+        201:
+          description: Herói cadastrado com sucesso!
+          schema:
+            $ref: '#/definitions/Heroi'
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Atualiza um herói
+      description: |
+        Este endpoint atualiza um herói no sistema. O ID do herói deve ser informado.
+      parameters:
+        - name: user
+          in: body
+          description: Heroi
+          required: true
+          schema:
+            $ref: '#/definitions/Heroi'
+      tags:
+        - Heroi
+      responses:
+        200:
+          description: Herói atualizado com sucesso!
+          schema:
+            $ref: '#/definitions/Heroi'
+        404:
+          description: Herói não encontrado. Lembre-se de informar o ID.
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+  /heroi/{id}:
+    get:
+      summary: Mostra apenas um herói
+      description: |
+        Este endpoint retorna **apenas o herói a qual foi informado o id**
+      parameters:
+        - name: id
+          in: path
+          description: ID do herói
+          required: true
+          type: integer
+      tags:
+        - Heroi
+      responses:
+        200:
+          description: Dados
+          schema:
+            $ref: '#/definitions/Heroi'
+        default:
+          description: Nada foi encontrado
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Usuario:
+    type: object
+    required:
+      - login
+      - nome
+      - email
+    properties:
+      id:
+        type: integer
+        description: Código do usuário
+      login:
+        type: string
+        description: Login do usuário
+      nome:
+        type: string
+        description: Nome do usuário 
+      email:
+        type: string
+        description: Email do usuário
+      admin:
+        type: integer
+        description: Verifica se o usuário é admin
+      data_criacao:
+        type: string
+        format: date
+        description: Data de criação do registro
+      data_alteracao:
+        type: string
+        format: date
+        description: Data de alteração do registro      
+  Heroi:
+    type: object
+    required:
+      - nome
+    properties:
+      id:
+        type: integer
+        description: Código do herói
+      nome:
+        type: string
+        description: Nome do herói
+      descricao:
+        type: string
+        description: Descricao do herói
+      localizacao:
+        type: integer
+        description: ID do registro de localização
+      distancia_em_km:
+        type: integer
+        description: Área de alcance do herói
+      data_criacao:
+        type: string
+        format: date
+        description: Data de criação do registro
+      data_alteracao:
+        type: string
+        format: date
+        description: Data de alteração do registro      
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
