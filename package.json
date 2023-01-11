@@ -11,7 +11,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cryptr": "^6.0.1",
-    "knex": "^0.20.10",
+    "knex": "^2.4.0",
     "mysql": "^2.18.1",
     "restify": "^8.5.1",
     "restify-error": "^1.0.0"
